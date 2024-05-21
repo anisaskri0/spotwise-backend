@@ -31,7 +31,7 @@ mongoose
     process.exit(1); // Exit the process if there is a connection error
   });
 const User = require("./models/user");
-const SpotData = require("./models/spotdata");
+const SpotData = require("./models/spotData");
 const sendVerificationEmail = async (email, verificationToken) => {
   // Create a Nodemailer transporter
   const transporter = nodemailer.createTransport({

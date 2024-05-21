@@ -15,7 +15,9 @@ app.use(bodyParser.json());
 
 const jwt = require("jsonwebtoken");
 
-
+app.get('/', (req, res) => {
+  res.send('THIS IS SPOTWISE BACKEND SERVER !!');
+});
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

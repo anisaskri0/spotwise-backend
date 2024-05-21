@@ -14,25 +14,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 const jwt = require("jsonwebtoken");
+
+
 app.listen(port, () => {
-  console.log("Server is running on port 8000 pl");
+  console.log(`Server is running on port ${port}`);
 });
 
+// Updated MongoDB connection without deprecated options
 mongoose
-  .connect(
-    "mongodb+srv://anisaskri:52978978aA@ecommerce.kqbp9od.mongodb.net/",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
+  .connect("mongodb+srv://anisaskri:52978978aA@ecommerce.kqbp9od.mongodb.net/", {})
   .then(() => {
     console.log("Connected to MongoDB");
   })
   .catch((err) => {
-    console.log("Error connecting to MongoDb", err);
+    console.error("Error connecting to MongoDB", err);
+    process.exit(1); // Exit the process if there is a connection error
   });
-
 const User = require("./models/user");
 const SpotData = require("./models/spotdata");
 const sendVerificationEmail = async (email, verificationToken) => {
@@ -201,7 +198,7 @@ const generateSecretKey = () => {
 const secretKey = generateSecretKey();
 
 //endpoint to login the user!
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 
 app.post("/login", async (req, res) => {
   try {
